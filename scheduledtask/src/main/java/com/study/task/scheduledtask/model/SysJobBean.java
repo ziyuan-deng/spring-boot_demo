@@ -1,7 +1,25 @@
 package com.study.task.scheduledtask.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
+/**
+ *  增加日期类型转换器，方式有四种：
+ *
+ *  第一种：在Bean实体字段或参数上增加@DateTimeFormat注解
+ *
+ *  第二种：在接收参数的的Controller中增加@InitBinder转化方法：
+ *  @InitBinder
+ *  protected  void initBinder(WebDataBinder binder) {
+ *     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+ *     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+ * }
+ *
+ *
+ *
+ * 定时任务信息
+ */
 public class SysJobBean {
     private String jobId;
 
@@ -16,9 +34,9 @@ public class SysJobBean {
     private String remark;
 
     private Integer jobStatus;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public String getJobId() {

@@ -19,6 +19,10 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(apiIdempotentInterceptor());
     }
 
+    /**
+     * 校验token的拦截器
+     * @return
+     */
     @Bean
     public ApiIdempotentInterceptor apiIdempotentInterceptor() {
         return new ApiIdempotentInterceptor();

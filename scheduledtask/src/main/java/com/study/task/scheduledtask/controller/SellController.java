@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 检验重复提交
@@ -39,6 +41,8 @@ public class SellController {
     public Response sellTask(HttpServletRequest request){
         try {
             String token =  "successful";
+            String[] array = {"123","345","456"};
+            List<String> list = Arrays.asList(array);
             return ResponseUtil.success(token);
         } catch (Exception e) {
             return ResponseUtil.result(ResponseEnum.FAILED.getCode(), null, e.getMessage());
