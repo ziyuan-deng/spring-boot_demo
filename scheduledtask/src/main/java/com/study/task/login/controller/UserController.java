@@ -4,6 +4,7 @@ import com.study.task.login.model.SysMenuEntity;
 import com.study.task.login.security.model.SelfUserEntity;
 import com.study.task.login.service.SysMenuService;
 import com.study.task.login.utils.ResultUtil;
+import com.study.task.scheduledtask.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 普通用户
@@ -25,6 +27,8 @@ public class UserController {
 
     @Autowired
     private SysMenuService sysMenuService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     /**
      * 用户端信息
@@ -38,6 +42,7 @@ public class UserController {
         SelfUserEntity userDetails = (SelfUserEntity) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
         result.put("title","用户端信息");
         result.put("data",userDetails);
+        redisUtil.set("orderId_"+ UUID.randomUUID().toString(),"orderInfo",3L);
         return ResultUtil.resultSuccess(result);
     }
 
