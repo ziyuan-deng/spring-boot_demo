@@ -4,6 +4,7 @@ import com.study.task.scheduledtask.utils.SpringContextUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
@@ -16,6 +17,8 @@ import java.util.Objects;
  * @create 2020-05-05 12:29
  */
 public class SchedulingRunnable implements Runnable {
+
+    //private TransactionDefinition transactionDefinition;
 
     private static final Logger logger = LoggerFactory.getLogger(SchedulingRunnable.class);
 
@@ -37,7 +40,7 @@ public class SchedulingRunnable implements Runnable {
 
     @Override
     public void run() {
-        logger.info("定时任务开始执行 - bean：{}，方法：{}，参数：{}", beanName, methodName, params);
+        //logger.info("定时任务开始执行 - bean：{}，方法：{}，参数：{}", beanName, methodName, params);
         long startTime = System.currentTimeMillis();
 
         try {
@@ -61,7 +64,7 @@ public class SchedulingRunnable implements Runnable {
         }
 
         long times = System.currentTimeMillis() - startTime;
-        logger.info("定时任务执行结束 - bean：{}，方法：{}，参数：{}，耗时：{} 毫秒", beanName, methodName, params, times);
+        //logger.info("定时任务执行结束 - bean：{}，方法：{}，参数：{}，耗时：{} 毫秒", beanName, methodName, params, times);
     }
 
     @Override

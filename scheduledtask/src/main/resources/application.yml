@@ -27,9 +27,11 @@ spring:
     login:
       username:  admin
       password:  123456
+  #json时间格式配置
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+  #redis配置
   redis:
     database: 0
     host: 192.168.106.101
@@ -43,10 +45,48 @@ spring:
         min-idle: 0
     timeout: 5000
 
+  #rabbimq配置
+  rabbitmq:
+    virtual-host: /
+    host: 192.168.106.101
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 20
+        prefetch: 50
+  #quautz参数配置
+  quartz:
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: quartzScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: false
+            clusterCheckinInterval: 10000
+            useProperties: false
+
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+
+#mq.env=local
+
 mybatis:
   config-location: classpath:/mybatis/sqlConfig.xml
   mapper-locations: classpath*:mybatis/task/*.xml
-  type-aliases-package: com.study.task.scheduledtask.model
 
 jwt:
   # 密匙KEY
@@ -59,3 +99,45 @@ jwt:
   expiration: 86400
   # 配置不需要认证的接口
   antMatchers: /index/**,/login/**,/favicon.ico
+
+#基础测试队列有关设置
+#basic.info.mq.exchange.name = local.basic.info.mq.exchange
+#basic.info.mq.routing.key.name = local.basic.info:mq.routing.key
+#basic.info.mq.queue.name = local.basic.info.mq.queue
+basic:
+  info:
+    mq:
+      exchange:
+        name: local.basic.info.mq.exchange
+      routing:
+        key:
+          name: local.basic.info:mq.routing.key
+      queue:
+        name: local.basic.info.mq.queue
+
+# product.robbing.mq.exchange.name=${mq.env}:product:robbing:mq:exchange
+# product.robbing.mq.routing.key.name=${mq.env}:product:robbing:mq:routing:key
+# product.robbing.mq.queue.name=${mq.env}:product:robbing:mq:queue
+product:
+  robbing:
+    mq:
+      exchange:
+        name: local.product.robbing.mq.exchange
+      routing:
+        key:
+          name: local.product.robbing.mq.routing.key
+      queue:
+        name: local.product.robbing.mq.queue
+
+ # simple.mq.queue.name=${mq.env}.simple.mq.queue
+ # simple.mq.exchange.name=${mq.env}.simple.mq.exchange
+ # simple.mq.routing.key.name=${mq.env}.simple.mq.routing.key
+simple:
+  mq:
+    queue:
+      name: local.simple.mq.queue
+    exchange:
+      name: local.simple.mq.exchange
+    routing:
+      key:
+        name: local.simple.mq.routing.key

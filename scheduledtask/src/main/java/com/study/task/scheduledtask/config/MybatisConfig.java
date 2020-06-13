@@ -36,8 +36,8 @@ public class MybatisConfig {
     @Resource(name = "druidDataSource")
     private DataSource druidDataSource;
 
-    @Value("${mybatis.type-aliases-package}")
-    private String typeAliasesPackage;
+   /* @Value("${mybatis.type-aliases-package}")
+    private String typeAliasesPackage;*/
     @Value("${mybatis.mapper-locations}")
     private String mapperLocations;
     @Value("${mybatis.config-location}")
@@ -51,7 +51,7 @@ public class MybatisConfig {
             PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
             SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
             sessionFactory.setDataSource(druidDataSource);
-            sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
+            //sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
             sessionFactory.setMapperLocations(resourcePatternResolver
                     .getResources(mapperLocations));
             sessionFactory.setConfigLocation(resourcePatternResolver

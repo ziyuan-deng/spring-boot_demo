@@ -84,6 +84,21 @@ public class ResponseUtil {
     public static ModelMap retErrorInfo(String msg) {
         return retInfo(ERROR, null, msg);
     }
+    /***
+     * 校验错误信息返回
+     * @param msg
+     * @return
+     */
+    public static Response retBatchErrorInfo(Object data, String msg) {
+
+        return  Response.builder()
+                .resCode(ERROR)
+                .resData(data)
+                .resMsg(msg)
+                .build();
+        //return retInfo(ERROR, data, msg);
+
+    }
 
     /***
      * 校验错误信息返回
