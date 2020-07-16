@@ -141,3 +141,31 @@ simple:
     routing:
       key:
         name: local.simple.mq.routing.key
+
+  #user.order.dead.queue.name=${mq.env}.user.order.dead.queue
+  #user.order.dead.exchange.name=${mq.env}.user.order.dead.exchange
+  #user.order.dead.routing.key.name=${mq.env}.user.order.dead.routing.key
+
+  #user.order.dead.produce.exchange.name=${mq.env}.user.order.dead.produce.exchange
+  #user.order.dead.produce.routing.key.name=${mq.env}.user.order.dead.produce.routing.key
+  #user.order.dead.produce.queue.name=${mq.env}.user.order.produce.real.queue
+# 死信队列
+user:
+  order:
+    dead:
+      queue:
+        name: local.user.order.dead.queue
+      exchange:
+        name: local.user.order.dead.exchange
+      routing:
+        key:
+          name: local.user.order.dead.routing.key
+
+      produce:
+        exchange:
+          name: local.user.order.dead.produce.exchange
+        queue:
+          name: local.user.order.produce.real.queue
+        routing:
+          key:
+            name: local.user.order.dead.produce.routing.key
